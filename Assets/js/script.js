@@ -7,8 +7,6 @@ $(function () {
   var events = [];
   var today = dayjs();
   const currentHour = today.format('H')
-
-  // renderEvents();
   
   // TODO: Add code to apply the past, present, or future class to each time
   // block by comparing the id to the current hour. HINTS: How can the id
@@ -86,15 +84,10 @@ $(function () {
       }
 
       events.push(eventObject)
-      console.log(eventObject)
 
-      localStorage.setItem('event', JSON.stringify(eventObject))
+      localStorage.setItem('event', JSON.stringify(events))
 
     }
-
-
-    
-
 
   })
 
@@ -104,18 +97,33 @@ $(function () {
   // attribute of each time-block be used to do this?
   //
 
-  // function renderEvents() {
-  //   var storedEvents = JSON.parse(localStorage.getItem('event'));
-    
-  //   if (storedEvents !== null) {
-  //     events = storedEvents;
-  //   }
-    
-  //   console.log(storedEvents)
+  function renderEvents() {
+    // Get stored events from localStorage
+    var storedEvents = JSON.parse(localStorage.getItem('event'));
+  
+    if (storedEvents !== null) {
+      events = storedEvents;
+    }
 
-  // }
+    for (var i=0; i<events.length; i++) {
+      var event = events[i]
+      var eventArea = document.querySelector(`#${event.eventId}`)
+      
+      eventArea.childNodes[1].value = event.objectEntry
+            
+    }
+
+    
+
+    
+    
+  
+    
+  }
 
   // TODO: Add code to display the current date in the header of the page.
   $('#currentDay').text(today.format('dddd, MMMM DD'))
+
+  renderEvents();
   
 });
