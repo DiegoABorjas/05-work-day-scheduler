@@ -50,6 +50,7 @@ $(function () {
     var buttonIcon = document.createElement('i');
     buttonIcon.setAttribute('class', 'fas fa-save');
     buttonIcon.setAttribute('aria-hidden', 'true');
+    buttonIcon.style.pointerEvents = 'none'
 
     // Append  all dynamically created elements
     hoursDivEl.appendChild(hourTitleEl);
@@ -83,6 +84,8 @@ $(function () {
         objectEntry: eventText
       }
 
+      
+
       events.push(eventObject)
 
       localStorage.setItem('event', JSON.stringify(events))
@@ -108,22 +111,17 @@ $(function () {
     for (var i=0; i<events.length; i++) {
       var event = events[i]
       var eventArea = document.querySelector(`#${event.eventId}`)
-      
+
       eventArea.childNodes[1].value = event.objectEntry
             
-    }
-
-    
-
-    
-    
-  
+    }  
     
   }
 
   // TODO: Add code to display the current date in the header of the page.
   $('#currentDay').text(today.format('dddd, MMMM DD'))
 
+  // Function to render the events stored in localStorage
   renderEvents();
   
 });
