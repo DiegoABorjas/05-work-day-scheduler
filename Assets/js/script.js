@@ -1,18 +1,10 @@
-// Wrap all code that interacts with the DOM in a call to jQuery to ensure that
-// the code isn't run until the browser has finished rendering all the elements
-// in the html.
+// jQuery function
 $(function () {
   var main = document.getElementById('main-container');
 
   var events = [];
   var today = dayjs();
   const currentHour = today.format('H')
-  
-  // TODO: Add code to apply the past, present, or future class to each time
-  // block by comparing the id to the current hour. HINTS: How can the id
-  // attribute of each time-block be used to conditionally add or remove the
-  // past, present, and future classes? How can Day.js be used to get the
-  // current hour in 24-hour time?
 
   // Loop starts at 9 and ends at 18, will add a div for each hour block between 9-5
   for (var i = 9; i < 18; i++) {
@@ -60,18 +52,12 @@ $(function () {
     main.appendChild(hoursDivEl);
   }
 
-// TODO: Add a listener for click events on the save button. This code should
-  // use the id in the containing time-block as a key to save the user input in
-  // local storage. HINT: What does `this` reference in the click listener
-  // function? How can DOM traversal be used to get the "hour-x" id of the
-  // time-block containing the button that was clicked? How might the id be
-  // useful when saving the description in local storage?
-  //
-
+  // Add event listener to save button
   main.addEventListener('click', function(event) {
 
     var element = event.target
     
+    // IF the the clicked element is a button proceed.
     if (element.matches('button')) {
       var id = element.parentElement.getAttribute('id')
       var eventText = element.parentElement.childNodes[1].value.trim();
@@ -85,28 +71,25 @@ $(function () {
       }   
 
       var index = eventObject.eventId
-      var entry = eventObject.objectEntry
 
+      // Loop through events array and check if duplicate entry is being added. If it is splice it
       for (var i=0; i<events.length; i++) {
         if (events[i].eventId === index) {
           events.splice([i], 1)
         }
       }
 
+      // "Push" object into the events array
       events.push(eventObject)
 
+      // Save to localStorage
       localStorage.setItem('event', JSON.stringify(events))
 
     }
   })
 
 
-  //
-  // TODO: Add code to get any user input that was saved in localStorage and set
-  // the values of the corresponding textarea elements. HINT: How can the id
-  // attribute of each time-block be used to do this?
-  //
-
+  // Function to render the events from localStorage
   function renderEvents() {
     // Get stored events from localStorage
     var storedEvents = JSON.parse(localStorage.getItem('event'));
@@ -114,7 +97,7 @@ $(function () {
     if (storedEvents !== null) {
       events = storedEvents;
     }
-
+    // Loop through events array and add events into their respective location
     for (var i=0; i<events.length; i++) {
       var event = events[i]
       var eventArea = document.querySelector(`#${event.eventId}`)

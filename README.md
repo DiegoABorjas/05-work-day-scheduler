@@ -24,7 +24,8 @@ THEN the saved events persist
 
 Here is a screenshot of what the application looks like:
 
-
+![Screenshot](./assets/images/screenshot.jpg)
 
 Link to the deployed application:
 
+https://diegoaborjas.github.io/05-work-day-scheduler/
