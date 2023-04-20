@@ -82,17 +82,24 @@ $(function () {
       var eventObject = {
         eventId: id,
         objectEntry: eventText
-      }
+      }   
 
-      
+      var index = eventObject.eventId
+      var entry = eventObject.objectEntry
+
+      for (var i=0; i<events.length; i++) {
+        if (events[i].eventId === index) {
+          events.splice([i], 1)
+        }
+      }
 
       events.push(eventObject)
 
       localStorage.setItem('event', JSON.stringify(events))
 
     }
-
   })
+
 
   //
   // TODO: Add code to get any user input that was saved in localStorage and set
