@@ -24,7 +24,7 @@ THEN the saved events persist
 
 Here is a screenshot of what the application looks like:
 
-![Screenshot](./assets/images/screenshot.jpg)
+![screenshot](https://user-images.githubusercontent.com/57971836/234128419-ca113875-c8e9-4b64-bc94-f2a7ca2c2e52.jpg)
 
 Link to the deployed application:
 
